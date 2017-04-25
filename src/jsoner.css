@@ -1,0 +1,20 @@
+.jsoner { position: relative; padding: 0 0 0 1em; font-size: 1em; font-family: monaco, Consolas, Menlo, Courier, monospace; line-height: 1.5; }
+.jsoner ul { display: block; margin: 0 0 0 1em; padding: 0; list-style-type: none; }
+.jsoner li { position: relative; display: block; margin: 0; padding: 0 0 0 1em; }
+.jsoner span { color: #000; }
+.jsoner a { color: inherit; }
+.jsoner .toggler { position: absolute; display: none; left: 0; width: 1em; height: 1.5em; color: #666; text-align: center; cursor: pointer; transform: scale(0.6); }
+.jsoner .toggler[data-type="array"],
+.jsoner .toggler[data-type="object"] { display: block; }
+.jsoner .toggler::before { content: "\0025BC"; }
+.jsoner .toggler.collapsed { transform: scale(0.6) rotate(-90deg); }
+.jsoner .toggler.collapsed ~ .value > ul { display: inline-block; width: 2em; height: 1em; margin: 0; overflow: hidden; text-align: center; color: transparent; }
+.jsoner .toggler.collapsed ~ .value > ul::before { content: "..."; color: #666; }
+.jsoner .value[data-type="null"],
+.jsoner .value[data-type="boolean"],
+.jsoner .value[data-type="number"] { color: #905; }
+.jsoner .value[data-type="string"],
+.jsoner .value[data-type="function"],
+.jsoner .value[data-type="date"] { color: #690; }
+.jsoner .value[data-type="array"],
+.jsoner .value[data-type="object"] { color: #666; }
