@@ -1,8 +1,11 @@
 .jsoner { position: relative; padding: 0 0 0 1em; font-size: 1em; font-family: monaco, Consolas, Menlo, Courier, monospace; line-height: 1.5; }
 .jsoner ul { display: block; margin: 0 0 0 1em; padding: 0; list-style-type: none; }
 .jsoner li { position: relative; display: block; margin: 0; padding: 0 0 0 1em; }
-.jsoner span { color: #000; }
-.jsoner a { color: inherit; }
+.jsoner a { color: inherit; text-decoration: underline; }
+.jsoner .toggler,
+.jsoner .key,
+.jsoner .separator,
+.jsoner .value { display: inline; font-weight: normal; text-decoration: none; font-style: normal; color: #000; }
 .jsoner .toggler { position: absolute; display: none; left: 0; width: 1em; height: 1.5em; color: #666; text-align: center; cursor: pointer; transform: scale(0.6); }
 .jsoner .toggler[data-type="array"],
 .jsoner .toggler[data-type="object"] { display: block; }

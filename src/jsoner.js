@@ -20,6 +20,21 @@
     JSONer.prototype = {
 
         /**
+         * Get variable type
+         *
+         * @param  {Mixed}  value
+         * @return {String}
+         */
+        _typeof: function(value) {
+            var result = Object.prototype.toString.call(value);
+            var match = result.match(/\[object (.+?)\]/);
+            if (match)
+                result = match[1];
+
+            return result;
+        },
+
+        /**
          * Encode HTML
          *
          * @param  {String} value
@@ -77,21 +92,22 @@
         /**
          * Span template
          *
+         * @param  {String} tag
          * @param  {String} content
          * @param  {String} className
          * @param  {String} type
          * @param  {Number} length    (optional)
          * @return {String}
          */
-        _template: function(content, className, type, length) {
+        _template: function(tag, content, className, type, length) {
             return ''
-                + '<span'
+                + '<' + tag
                 + ' class="' + className + '"'
                 + ' data-type="' + type + '"'
                 + (typeof length === 'undefined' ? '' : ' data-length="' + length + '"')
                 + '>'
                 + content
-                + '</span>';
+                + '</' + tag + '>';
         },
 
         /**
@@ -105,10 +121,10 @@
          */
         _render: function(key, value, type, length) {
             var result = '';
-            result += this._template('', 'toggler', type, length);
-            result += this._template(key ? '"' + key + '"' : '', 'key', type, length);
-            result += this._template(key ? ': ' : '', 'separator', type, length);
-            result += this._template(value, 'value', type, length);
+            result += this._template('i', '', 'toggler', type, length);
+            result += this._template('strong', key ? '"' + key + '"' : '', 'key', type, length);
+            result += this._template('span', key ? ': ' : '', 'separator', type, length);
+            result += this._template('div', value, 'value', type, length);
 
             return result;
         },
@@ -121,16 +137,11 @@
          * @return {String}
          */
         _format: function(key, value) {
-            var type = typeof value;
-            if (value === null) type = 'null';
-            if (type === 'object' && value.constructor === Date) type = 'date';
-            if (type === 'object' && value.constructor === Array) type = 'array';
-
-            var fn = '_format' + type.charAt(0).toUpperCase() + type.slice(1);
-            if (typeof this[fn] !== 'function')
+            var type = this._typeof(value);
+            if (typeof this['_format' + type] !== 'function')
                 throw 'No JSON.toHTML render method for type ' + type + '.';
 
-            return this[fn].call(this, key, value);
+            return this['_format' + type].call(this, key, value);
         },
 
         /**
