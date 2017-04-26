@@ -17,7 +17,6 @@
 .jsoner .value[data-type="boolean"],
 .jsoner .value[data-type="number"] { color: #905; }
 .jsoner .value[data-type="string"],
-.jsoner .value[data-type="function"],
 .jsoner .value[data-type="date"] { color: #690; }
 .jsoner .value[data-type="array"],
 .jsoner .value[data-type="object"] { color: #666; }

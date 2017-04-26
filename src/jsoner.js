@@ -81,11 +81,6 @@
          * @return {Mixed}
          */
         _replacer: function(key, value) {
-            if (typeof value === 'undefined')
-                return null;
-            else if (typeof value === 'function')
-                return '(function)';
-
             return value;
         },
 
@@ -152,7 +147,7 @@
          * @return {String}
          */
         _formatUndefined: function(key, value) {
-            return this._formatNull(key, value);
+            // pass
         },
 
         /**
@@ -211,7 +206,7 @@
          * @return {String}
          */
         _formatFunction: function(key, value) {
-            return this._render(key, '"(function)"', 'function');
+            // pass
         },
 
         /**
@@ -235,8 +230,12 @@
         _formatArray: function(key, value) {
             var result = '[<ul>';
             for (var i = 0; i < value.length; i++) {
+                var render = this._format.call(this, null, value[i]);
+                if (!render)
+                    continue;
+
                 result += '<li>';
-                result += this._format.call(this, null, value[i]);
+                result += render;
                 result += (i < value.length - 1) ? ',' : '';
                 result += '</li>';
             }
@@ -256,8 +255,12 @@
             var result = '{<ul>';
             var props = Object.keys(value);
             for (var i = 0; i < props.length; i++) {
+                var render = this._format.call(this, props[i], value[props[i]]);
+                if (!render)
+                    continue;
+
                 result += '<li>';
-                result += this._format.call(this, props[i], value[props[i]]);
+                result += render;
                 result += (i < props.length - 1) ? ',' : '';
                 result += '</li>';
             }
