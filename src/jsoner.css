@@ -11,8 +11,12 @@
 .jsoner .toggler[data-type="object"] { display: block; }
 .jsoner .toggler::before { content: "\0025BC"; }
 .jsoner .toggler.collapsed { transform: scale(0.6) rotate(-90deg); }
-.jsoner .toggler.collapsed ~ .value > ul { display: inline-block; width: 2em; height: 1em; margin: 0; overflow: hidden; text-align: center; color: transparent; }
-.jsoner .toggler.collapsed ~ .value > ul::before { content: "..."; color: #666; }
+.jsoner .toggler.collapsed ~ .value > ul { display: inline-block; height: 1.5em; margin: 0; overflow: hidden; vertical-align: top; text-align: center; color: transparent; }
+.jsoner .toggler.collapsed ~ .value > ul::before { content: "..."; margin: 0 0.2em; text-transform: capitalize; color: #666; }
+.jsoner .toggler.collapsed ~ .value > ul[data-type]::before { content: attr(data-type); }
+.jsoner .toggler.collapsed ~ .value > ul[data-type][data-length]::before { content: attr(data-type) "(" attr(data-length) ")" }
+.jsoner .toggler.collapsed ~ .value > ul[data-type="object"][data-length]::before { content: attr(data-type); }
+.jsoner .toggler.collapsed ~ .value > ul > li { width: 0; }
 .jsoner .value[data-type="null"],
 .jsoner .value[data-type="boolean"],
 .jsoner .value[data-type="number"] { color: #905; }

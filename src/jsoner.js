@@ -228,7 +228,7 @@
          * @return {String}
          */
         _formatArray: function(key, value) {
-            var result = '[<ul>';
+            var result = '[<ul data-type="array" data-length="' + value.length + '">';
             for (var i = 0; i < value.length; i++) {
                 var render = this._format.call(this, null, value[i]);
                 if (!render)
@@ -252,8 +252,8 @@
          * @return {String}
          */
         _formatObject: function(key, value) {
-            var result = '{<ul>';
             var props = Object.keys(value);
+            var result = '{<ul data-type="object" data-length="' + props.length + '">';
             for (var i = 0; i < props.length; i++) {
                 var render = this._format.call(this, props[i], value[props[i]]);
                 if (!render)
