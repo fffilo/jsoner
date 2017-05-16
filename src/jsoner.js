@@ -228,13 +228,13 @@
          * @return {String}
          */
         _formatArray: function(key, value) {
-            var result = '[<ul data-type="array" data-length="' + value.length + '">';
+            var result = '[<ul class="list" data-type="array" data-length="' + value.length + '">';
             for (var i = 0; i < value.length; i++) {
                 var render = this._format.call(this, null, value[i]);
                 if (!render)
                     continue;
 
-                result += '<li>';
+                result += '<li class="item">';
                 result += render;
                 result += (i < value.length - 1) ? ',' : '';
                 result += '</li>';
@@ -253,13 +253,13 @@
          */
         _formatObject: function(key, value) {
             var props = Object.keys(value);
-            var result = '{<ul data-type="object" data-length="' + props.length + '">';
+            var result = '{<ul class="list" data-type="object" data-length="' + props.length + '">';
             for (var i = 0; i < props.length; i++) {
                 var render = this._format.call(this, props[i], value[props[i]]);
                 if (!render)
                     continue;
 
-                result += '<li>';
+                result += '<li class="item">';
                 result += render;
                 result += (i < props.length - 1) ? ',' : '';
                 result += '</li>';
@@ -319,6 +319,8 @@
     window.addEventListener('click', function(e) {
         if (e.target.parentElement.querySelector('.jsoner .toggler') === e.target)
             e.target.classList.toggle('collapsed');
+        else if (e.target.parentElement.querySelector('.jsoner .toggler.collapsed ~ .value > .list') === e.target)
+            e.target.parentElement.parentElement.children[0].classList.toggle('collapsed');
     }, false);
 
     // globalize
