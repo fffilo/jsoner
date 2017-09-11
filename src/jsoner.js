@@ -117,8 +117,8 @@
         _render: function(key, value, type, length) {
             var result = '';
             result += this._template('i', '', 'toggler', type, length);
-            result += this._template('strong', key ? '"' + key + '"' : '', 'key', type, length);
-            result += this._template('span', key ? ': ' : '', 'separator', type, length);
+            result += this._template('strong', typeof key === 'string' ? '"' + key + '"' : '', 'key', type, length);
+            result += this._template('span', typeof key === 'string' ? ': ' : '', 'separator', type, length);
             result += this._template('div', value, 'value', type, length);
 
             return result;
