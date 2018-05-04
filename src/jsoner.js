@@ -317,6 +317,9 @@
 
     // bind collapse event
     window.addEventListener('click', function(e) {
+        if (!e.target || !e.target.parentElement)
+            return;
+
         if (e.target.parentElement.querySelector('.jsoner .toggler') === e.target)
             e.target.classList.toggle('collapsed');
         else if (e.target.parentElement.querySelector('.jsoner .toggler.collapsed ~ .value > .list') === e.target)
